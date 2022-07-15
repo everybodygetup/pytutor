@@ -8,6 +8,7 @@ from models import UserSubmit
 """GET запросы возвращают инфо браузеру, POST отправляют инфо на сервер."""
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    db.create_all()
     """В шаблоне base через url_for передал функции (index)"""
     user_name = 'Sergey'
     """Передаем в render_template -> передается из контрролера в шаблон index.html."""
@@ -17,12 +18,12 @@ def index():
         user_db = UserSubmit(
             name=f"{request.form.get('name')} {request.form.get('last_name')}",
             email=request.form.get('email')
-        )
+             )
         db.session.add(user_db)
         db.session.commit()
         user_list_db = UserSubmit.query.all()
         for user in user_list_db:
-            """print(user.id, user.name, user.email)"""
+            print(user.id, user.name, user.email)
         return redirect(url_for('index'))
     return render_template('index.html',user_name=user_name,form=form)
 
