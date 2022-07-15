@@ -1,28 +1,25 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
+<!-- Banner -->
+<section id="banner">
+  <div class="inner">
+    <h1>{{ service_name }}</h1>
+  </div>
+</section>
 
-{% block content %}
+<!-- Wrapper -->
+<section id="wrapper">
+  {% if service_name == 'ortopediya-dlya-vzroslyh' %}
+  <h1>Ортопедия для взрослых</h1>
 
-              <!-- Banner -->
-        <section id="banner">
-          <div class="inner">
-            <h1>{{ service_name }}</h1>
-          </div>
-        </section>
+  {% elif service_name == 'podologiya' %}
+  <h1>Подология</h1>
 
-              <!-- Wrapper -->
-        <section id="wrapper">
+  {% elif service_name == 'konsultatsii-po-internetu' %}
+  <h1>Консультации по интернету</h1>
 
-        {% if service_name == 'ortopediya-dlya-vzroslyh' %}
-          <h1>Ортопедия для взрослых</h1>
-
-
-        {% elif service_name == 'podologiya' %}
-          <h1>Подология</h1>
-        {% endif %}
-
-
-
-
-        </section>
+  {% elif service_name == 'pomoshch-na-domu' %}
+  <h1>Помощь на дому</h1>
+  {% endif %}
+</section>
 {% endblock %}

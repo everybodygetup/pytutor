@@ -1,5 +1,16 @@
 @import url(fontawesome-all.min.css);
 
+.is-admin::before {
+  content: "Админ";
+  display: block;
+  background: red;
+  color: wheat;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 111;
+}
+
 /*
 	Fractal by HTML5 UP
 	html5up.net | @ajlkn

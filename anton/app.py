@@ -1,8 +1,15 @@
 from flask import render_template, redirect, request
+from flask_security import current_user, login_required
 
-from init import app, db
+from init import app
+from extensions import db
 from forms import DemoForm
 from models import UserSubmit
+
+
+@app.before_first_request
+def init():
+    db.create_all()
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -11,6 +18,15 @@ def index():
     page_title = "Главная"
 
     return render_template("index.j2", page_title=page_title)
+
+
+@app.get("/lk")
+@login_required
+def lk():
+    """Личный кабинет."""
+    page_title = "Личный кабинет"
+    email = current_user.email
+    return f"Личный кабинет: {email}"
 
 
 @app.route("/test")

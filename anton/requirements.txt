@@ -1,5 +1,9 @@
+bcrypt
 email_validator
 flask
-flask-wtf
-flask-sqlalchemy
 flask-migrate
+flask-security-too
+flask-sqlalchemy
+flask-wtf
+python-dotenv
+python-slugify

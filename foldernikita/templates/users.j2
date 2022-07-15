@@ -1,0 +1,15 @@
+{% extends "base.j2" %}
+{% block content %}
+
+        <!-- Wrapper -->
+          <section id="wrapper">
+            <div class="inner">
+              <ul>
+                {% for user in users %}
+                  <li>{{ user.id }}: {{ user.name }} {{ user.email }} {{ user.message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
+
+{% endblock %}
