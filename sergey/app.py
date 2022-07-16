@@ -1,15 +1,57 @@
 from flask import redirect, render_template, request, url_for
 """из фласка импортируем класс(Flask), подключаем (рендрим) шаблоны из фласка."""
+
+from flask_security import current_user, login_required
+
+from extensions import db  # изменили обращение к db, теперь из папки расширений (extensions)
 from forms import Feedback
-from init import app, db
+from init import app
 from models import UserSubmit
+
+
+@app.before_first_request  # чтобы обращение было один раз (если хотим вводить данные постоянно - before_request)
+def init():
+    db.create_all()
+
+
+@app.get("/lk")  # делаем личный кабинет
+@login_required
+def lk():
+    """Личный кабинет."""
+    page_title = "Личный кабинет"
+    email = current_user.email
+    return f"Личный кабинет: {email}"
+
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    """Показ главной страницы."""
+    page_title = 'Главная'
+    return render_template("index.html", page_title=page_title)
+
+
+@app.route("/work")
+def work():
+    page_title = 'Работа'
+    return render_template('work.html', page_title=page_title)
+
+
+@app.route("/study")
+def study():
+    page_title = 'Учеба'
+    return render_template('study.html', page_title=page_title)
+
+
+@app.route("/life")
+def life():
+    page_title = 'Жизнь'
+    return render_template('life.html', page_title=page_title)
+
 
 """c помощью декоратора @app делаем зрительный образ, то что должно показывать на главной странице."""
 """GET запросы возвращают инфо браузеру, POST отправляют инфо на сервер."""
 @app.route("/", methods=['GET', 'POST'])
-def index():
-    db.create_all()
-    """В шаблоне base через url_for передал функции (index)"""
+def index():  # В шаблоне base через url_for передал функции (index)
     user_name = 'Sergey'
     """Передаем в render_template -> передается из контрролера в шаблон index.html."""
     form = Feedback(request.form)
@@ -26,21 +68,6 @@ def index():
             print(user.id, user.name, user.email)
         return redirect(url_for('index'))
     return render_template('index.html',user_name=user_name,form=form)
-
-
-@app.route("/work")
-def work():
-    return render_template('work.html')
-
-
-@app.route("/study")
-def study():
-    return render_template('study.html')
-
-
-@app.route("/life")
-def life():
-    return render_template('life.html')
 
 
 """Тестовый декоратор"""
