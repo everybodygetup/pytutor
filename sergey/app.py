@@ -23,37 +23,30 @@ def lk():
     return f"Личный кабинет: {email}"
 
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    """Показ главной страницы."""
-    page_title = 'Главная'
-    return render_template("index.html", page_title=page_title)
-
-
 @app.route("/work")
 def work():
     page_title = 'Работа'
-    return render_template('work.html', page_title=page_title)
+    return render_template('work.j2', page_title=page_title)
 
 
 @app.route("/study")
 def study():
     page_title = 'Учеба'
-    return render_template('study.html', page_title=page_title)
+    return render_template('study.j2', page_title=page_title)
 
 
 @app.route("/life")
 def life():
     page_title = 'Жизнь'
-    return render_template('life.html', page_title=page_title)
+    return render_template('life.j2', page_title=page_title)
 
 
 """c помощью декоратора @app делаем зрительный образ, то что должно показывать на главной странице."""
 """GET запросы возвращают инфо браузеру, POST отправляют инфо на сервер."""
 @app.route("/", methods=['GET', 'POST'])
 def index():  # В шаблоне base через url_for передал функции (index)
-    user_name = 'Sergey'
-    """Передаем в render_template -> передается из контрролера в шаблон index.html."""
+    page_title = 'Главная'
+    """Передаем в render_template -> передается из контрролера в шаблон index.j2."""
     form = Feedback(request.form)
     if form.validate_on_submit():
         """print(f"Имя кто заполнил: {request.form.get('name')}, \nEmail: {request.form.get('email')}")"""
@@ -67,10 +60,10 @@ def index():  # В шаблоне base через url_for передал фун�
         for user in user_list_db:
             print(user.id, user.name, user.email)
         return redirect(url_for('index'))
-    return render_template('index.html',user_name=user_name,form=form)
+    return render_template("index.j2", page_title=page_title, form=form)
 
 
 """Тестовый декоратор"""
 @app.route("/test")
 def test():
-    return render_template('test.html')
+    return render_template('test.j2')

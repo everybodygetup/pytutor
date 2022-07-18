@@ -1,4 +1,4 @@
-ecrypt
+bcrypt
 email_validator
 flask
 flask-migrate
