@@ -27,7 +27,7 @@ class BaseConfig:
     SECURITY_POST_LOGIN_VIEW = "/lk"
     SECURITY_EMAIL_SENDER = os.getenv("MAIL_USERNAME")
 
-    SECURITY_LOGIN_USER_TEMPLATE = "security/login.html"
+    SECURITY_LOGIN_USER_TEMPLATE = "security/login.j2"
     SECURITY_REGISTER_USER_TEMPLATE = "security/register.j2"
     SECURITY_RESET_PASSWORD_TEMPLATE = "security/reset.j2"
     SECURITY_FORGOT_PASSWORD_TEMPLATE = "security/forgot.j2"

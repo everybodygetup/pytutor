@@ -23,6 +23,15 @@ def lk():
     return f"Личный кабинет: {email}"
 
 
+@app.route("/users")
+
+def users():
+    """Вывод списка пользователей."""
+    page_title = "Список пользователей, кто заполнил форму"
+    user_list_db = UserSubmit.query.all()
+    return render_template("users.j2", page_title=page_title, users=user_list_db)
+
+
 @app.route("/work")
 def work():
     page_title = 'Работа'
@@ -60,7 +69,7 @@ def index():  # В шаблоне base через url_for передал фун�
         for user in user_list_db:
             print(user.id, user.name, user.email)
         return redirect(url_for('index'))
-    return render_template("index.j2", page_title=page_title, form=form)
+    return render_template("index.j2", page_title=page_title, form=form, index=True)
 
 
 """Тестовый декоратор"""

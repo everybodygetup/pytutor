@@ -17,7 +17,7 @@
   <body class="is-preload">
       <div id="page-wrapper">
           <header id="header" class="alt">
-            <h1><a href="index.html">Present one</a></h1>
+            <h1><a href="index.j2">Present one</a></h1>
             <nav>
               <a href="#menu">Меню</a>
             </nav>
@@ -30,32 +30,37 @@
                 <li><a href="{{ url_for('work') }}">Работа</a></li>
                 <li><a href="{{ url_for('study') }}">Учеба</a></li>
                 <li><a href="{{ url_for('life') }}">It's my life</a></li>
+                {% if not current_user.is_authenticated %}
+                  <li><a href="{{ url_for_security('login') }}">Вход</a></li>
+                  <li><a href="{{ url_for_security('register') }}">Регистрация</a></li>
+                {% else %}
+                  <li>{{ current_user.email }}<a href="{{ url_for_security('logout') }}">Выход</a></li>
+                {% endif %}
               </ul>
-              <a href="#" class="close">Close</a>
+              <a href="#" class="close">Закрыть</a>
             </div>
           </nav>
-        </div>
+          {% if index %}
+            <section id="banner">
 
-          <section id="banner">
-
-            <div class="video-box" style="margin-left: -3em;margin-top: -12em;max-height: 100vh;overflow:  hidden;margin-right: -3em;">
-              <video preload="auto" autoplay="autoplay" loop="loop" muted="" playsinline="playsinline" style="width: 92em;">
-              <source src="https://cdn.videvo.net/videvo_files/video/free/2019-01/large_watermarked/181015_13_Venice%20Beach%20Drone_25_preview.mp4">
-              <!--<source src="/static/images/vid.mp4" type="video/mp4">-->
-              </video>
+              <div class="video-box" style="margin-left: -3em;margin-top: -12em;max-height: 100vh;overflow:  hidden;margin-right: -3em;">
+                <video preload="auto" autoplay="autoplay" loop="loop" muted="" playsinline="playsinline" style="width: 92em;">
+                <source src="https://cdn.videvo.net/videvo_files/video/free/2019-01/large_watermarked/181015_13_Venice%20Beach%20Drone_25_preview.mp4">
+                <!--<source src="/static/images/vid.mp4" type="video/mp4">-->
+                </video>
+                </div>
+                <div class="inner" style="position: absolute;top: 190px;">
+                  <span><img class="rounded-img" src="/static/images/img.jpg" style="margin-right: 100px;">
+                  </span>
+                    <div class="logo">
+                    </div>
+                    <h2>Серёга - all the best, от Бога!</h2>
+                    <p>коротко о себе</p>
+                    <button>Like!</button>
+                </div>
               </div>
-              <div class="inner" style="position: absolute;top: 190px;">
-                <span><img class="rounded-img" src="/static/images/img.jpg" style="margin-right: 100px;">
-                </span>
-                  <div class="logo">
-                  </div>
-                  <h2>Серёга - all the best, от Бога!</h2>
-                  <p>коротко о себе</p>
-                  <button>Like!</button>
-              </div>
-            </div>
-          </section>
-
+            </section>
+          {% endif %}
           {% block content %}{% endblock %}
 
           <section id="footer">
