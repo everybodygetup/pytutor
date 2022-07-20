@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request,url_for
 
 from flask_security import current_user, login_required
-
+from mail import send_email
 from init import app
 from extensions import db
 from forms import DemoForm
@@ -43,6 +43,13 @@ def lk():
     page_title = "Личный кабинет"
     email = current_user.email
     return f"Личный кабинет: {email}"
+
+
+@app.route("/mail", methods=["GET", "POST"])
+def test_mail():
+    page_title = "Главная"
+    send_email("Тестовое письмо")
+    return render_template("index.html", page_title=page_title)
 
 
 @app.route("/users")

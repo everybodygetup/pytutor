@@ -8,7 +8,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:
-    APP_NAME = "Clinique"
+    APP_NAME = "DoctorLikhachevskiy"
 
     BABEL_DEFAULT_LOCALE = "ru"
     LANGUAGES = ["en", "ru"]
@@ -23,7 +23,7 @@ class BaseConfig:
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 
     SECURITY_CHANGEABLE = True
-    SECURITY_CONFIRMABLE = False
+    SECURITY_CONFIRMABLE = True
     SECURITY_REGISTERABLE = True
     SECURITY_RECOVERABLE = True
     SECURITY_TRACKABLE = True
