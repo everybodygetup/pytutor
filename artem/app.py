@@ -1,7 +1,10 @@
-from flask import render_template, request, redirect, url_for  # Импорт из модуля класс Flask, render - передаем шаблон
-from forms import DemoForm
-from init import app, db
+from flask import render_template, redirect, request,url_for
 
+from flask_security import current_user, login_required
+
+from init import app
+from extensions import db
+from forms import DemoForm
 from models import UserSubmit
 
 
@@ -31,6 +34,23 @@ def index():  # В шаблоне base через url_for передал фун�
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+
+@app.get("/lk")
+@login_required
+def lk():
+    """Личный кабинет."""
+    page_title = "Личный кабинет"
+    email = current_user.email
+    return f"Личный кабинет: {email}"
+
+
+@app.route("/users")
+def users():
+    """Вывод списка пользователей."""
+    page_title = "Список пользователей, кто заполнил форму"
+    user_list_db = UserSubmit.query.all()
+    return render_template("users.html", page_title=page_title, users=user_list_db)
 
 
 @app.route('/test')
