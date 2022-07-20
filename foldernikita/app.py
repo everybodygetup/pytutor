@@ -1,20 +1,15 @@
-import os
+from flask import render_template, redirect, request
+from flask_security import current_user, login_required
 
-from flask import Flask, render_template, redirect, request, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from init import app
+from extensions import db
 from form import ContactForm
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
 from models import UserSubmit
+
+
+@app.before_first_request
+def init():
+    db.create_all()
 
 @app.route("/", methods=['GET', 'POST'])
 def index():

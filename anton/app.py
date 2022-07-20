@@ -1,9 +1,9 @@
-from flask import render_template, redirect, request
-from flask_security import current_user, login_required
-
-from init import app
 from extensions import db
+from flask import redirect, render_template, request
+from flask_security import current_user, login_required
 from forms import DemoForm
+from init import app
+from mail import send_email
 from models import UserSubmit
 
 
@@ -17,6 +17,13 @@ def index():
     """Показ главной страницы."""
     page_title = "Главная"
 
+    return render_template("index.j2", page_title=page_title)
+
+
+@app.route("/mail", methods=["GET", "POST"])
+def test_mail():
+    page_title = "Главная"
+    send_email("Тестовое письмо")
     return render_template("index.j2", page_title=page_title)
 
 
@@ -57,10 +64,12 @@ def demo_form():
     page_title = "Демо-форма"
     form = DemoForm()
     if form.validate_on_submit():
-        print(f"Имя кто заполнил: {request.form.get('name')}, \nEmail: {request.form.get('email')}")
+        print(
+            f"Имя кто заполнил: {request.form.get('name')}, \nEmail: {request.form.get('email')}"
+        )
         user_db = UserSubmit(
             name=f"{request.form.get('name')} {request.form.get('last_name')}",
-            email=request.form.get('email')
+            email=request.form.get("email"),
         )
         db.session.add(user_db)
         db.session.commit()

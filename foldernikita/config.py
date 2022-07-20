@@ -1,5 +1,5 @@
 import os
-
+from trace import Trace
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,12 +8,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:
-    APP_NAME = "Фрактал"
-
-    BABEL_DEFAULT_LOCALE = "ru"
-    LANGUAGES = ["en", "ru"]
-
-    MAIL_ADMINS = ["info@jokerinteractive.ru"]
+    MAIL_ADMINS = [""]
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 465))
@@ -39,12 +34,12 @@ class BaseConfig:
     SECURITY_CHANGE_PASSWORD_TEMPLATE = "security/change.j2"
     SECURITY_SEND_CONFIRMATION_TEMPLATE = "security/confirm.j2"
 
-    SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT", "kjasdkjh234df")
+    SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT", "keyyek12112")
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     WTF_CSRF_ENABLED = True
-    WTF_CSRF_SECRET_KEY = "b7&dZxm2_xp^jz@ddX$$e=b160k5ru&+d"
+    WTF_CSRF_SECRET_KEY = "key123"
     WTF_CSRF_SSL_STRICT = False
 
     @staticmethod
@@ -58,7 +53,7 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     DEV_SECRET_KEY = "y5gD_xpd+f6ahaF#o&*VCC)V&Adm2qt&"
     SECRET_KEY = os.getenv("SECRET_KEY", DEV_SECRET_KEY)
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'app.db')}"
+    SQLALCHEMY_DATABASE_URI=f"sqlite:///{os.path.join(basedir, 'app.db')}",
 
 
 class TestingConfig(DevelopmentConfig):
@@ -74,18 +69,14 @@ class ProductionConfig(BaseConfig):
     DB_PORT = os.getenv("DB_PORT", "3306")
     DB_NAME = os.getenv("DB_NAME")
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = (
-        f"{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-    )
+    SQLALCHEMY_DATABASE_URI = f"{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_size": 10,
         "pool_recycle": 3600,
         "pool_pre_ping": True,
     }
 
-
 config = {
     "development": DevelopmentConfig,
     "testing": TestingConfig,
     "production": ProductionConfig,
-}

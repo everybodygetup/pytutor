@@ -1,13 +1,13 @@
 from datetime import datetime
-from sqlalchemy.sql import func
-
-from flask_security import RoleMixin, SQLAlchemyUserDatastore, UserMixin
 
 from extensions import db
+from flask_security import RoleMixin, SQLAlchemyUserDatastore, UserMixin
+from sqlalchemy.sql import func
 
 
 class UserSubmit(db.Model):
     """Таблица заполненных демо-форм сайта."""
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
     email = db.Column(db.String(120), index=True)
@@ -57,7 +57,9 @@ class User(db.Model, UserMixin):
         onupdate=datetime.utcnow,
     )
 
-    roles = db.relationship("Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic"))
+    roles = db.relationship(
+        "Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic")
+    )
 
     @property
     def phone(self) -> str:
