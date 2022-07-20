@@ -1,4 +1,6 @@
 from flask import redirect, render_template, request, url_for
+
+from mail import send_email
 """из фласка импортируем класс(Flask), подключаем (рендрим) шаблоны из фласка."""
 
 from flask_security import current_user, login_required
@@ -72,7 +74,9 @@ def index():  # В шаблоне base через url_for передал фун�
     return render_template("index.j2", page_title=page_title, form=form, index=True)
 
 
-"""Тестовый декоратор"""
-@app.route("/test")
-def test():
-    return render_template('test.j2')
+"""Тестовый mail"""
+@app.route("/mail", methods=["GET", "POST"])
+def test_mail():
+    page_title = "Главная"
+    send_email("Тестовое письмо")
+    return render_template('index.j2', page_title=page_title)

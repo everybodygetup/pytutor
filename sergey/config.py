@@ -8,7 +8,11 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:
-    MAIL_ADMINS = ["admin@makehtml.ru"]
+    APP_NAME = "Present one"
+    BABEL_DEFAULT_LOCALE = "ru"
+    LANGUAGES = ["en", "ru"]
+
+    MAIL_ADMINS = ["youshkoff@yandex.ru"]
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 465))
