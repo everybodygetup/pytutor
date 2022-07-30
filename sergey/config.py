@@ -1,5 +1,4 @@
 import os
-from trace import Trace
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,7 +10,7 @@ class BaseConfig:
     APP_NAME = "Present one"
     BABEL_DEFAULT_LOCALE = "ru"
     LANGUAGES = ["en", "ru"]
-
+    # Вписываем почту для админов, можно несколько через запятую
     MAIL_ADMINS = ["youshkoff@yandex.ru"]
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
@@ -22,7 +21,7 @@ class BaseConfig:
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 
     SECURITY_CHANGEABLE = True
-    SECURITY_CONFIRMABLE = False
+    SECURITY_CONFIRMABLE = True
     SECURITY_REGISTERABLE = True
     SECURITY_RECOVERABLE = True
     SECURITY_TRACKABLE = True
