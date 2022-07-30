@@ -67,14 +67,17 @@ def send_email(subject=None, **kwargs):
 def send_async_email(subject, recipients, sender, body=None, html=None):
     """
 
-    :param subject: param recipients:
-    :param sender: param body:  (Default value = None)
-    :param html: Default value = None)
-    :param recipients: param body:  (Default value = None)
-    :param body: Default value = None)
+    :param subject:
+    :param recipients:
+    :param sender:
+    :param body:  (Default value = None)
+    :param html: (Default value = None)
 
     """
     msg = Message(subject=subject, from_email=sender, to=recipients)
-    msg.body = body
-    msg.html = html
+    if body:
+        msg.body = body
+    else:
+        msg.body = html
+        msg.content_subtype = "html"
     msg.send()
