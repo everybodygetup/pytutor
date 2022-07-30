@@ -1,0 +1,16 @@
+{% extends "base.j2" %}
+
+{% block content %}
+  <section id="four" class="wrapper">
+  <h1>Зарегистрированные пользователи</h1>
+    <div class="inner">
+      <header class="major">
+        <ul style="text-align: left;font-size:20px">
+          {% for user in users%}
+            <li><b>{{ user.id }}</b>: {{ user.name }} ({{ user.email }})</li>
+          {% endfor %}
+        </ul>
+      </header>
+    </div>
+  </section>
+{% endblock %}
