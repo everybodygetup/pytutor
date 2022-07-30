@@ -16,7 +16,6 @@ def sendmail_callback(future):
         f"{datetime.now()} => Почта {'успешно' if future.done() else 'не'} отправлена"
     )
 
-
 class SecMailUtil(MailUtil):
     """Кастомный класс для отправки почты для flask-security."""
 
@@ -46,7 +45,7 @@ class SecMailUtil(MailUtil):
         executor.add_default_done_callback(sendmail_callback)
         executor.submit(send_async_email, subject, recipients, sender, body, html)
 
-
+    # запускаем функцию отправки почты
 def send_email(subject=None, **kwargs):
     """
 
