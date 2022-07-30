@@ -1,10 +1,10 @@
+# Это импортируем из существующей библиотеки библиотееки
 from flask import redirect, render_template, request, url_for
-
 from mail import send_email
 """из фласка импортируем класс(Flask), подключаем (рендрим) шаблоны из фласка."""
-
 from flask_security import current_user, login_required
 
+# Это импортируем из созданных нами
 from extensions import db  # изменили обращение к db, теперь из папки расширений (extensions)
 from forms import Feedback
 from init import app
