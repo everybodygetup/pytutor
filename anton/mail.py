@@ -18,7 +18,7 @@ def sendmail_callback(future):
 
 
 class SecMailUtil(MailUtil):
-    """Касомный класс для отправки почты для flask-security."""
+    """Кастомный класс для отправки почты для flask-security."""
 
     def send_mail(
         self, template, subject, recipient, sender, body, html, user, **kwargs
@@ -29,13 +29,10 @@ class SecMailUtil(MailUtil):
         :param subject:
         :param recipient:
         :param sender:
-        :param body: param html:
-        :param user: param **kwargs:
-        :param subject: param sender:
-        :param html: param **kwargs:
-        :param sender: param **kwargs:
+        :param body:
+        :param html:
+        :param user:
         :param **kwargs:
-
         """
         sender = f"Робот с сайта «{current_app.config['APP_NAME']}» <{current_app.config['MAIL_USERNAME']}>"
         recipients = [recipient]
@@ -58,7 +55,7 @@ def send_email(subject=None, **kwargs):
     time = datetime.now().ctime()
     recipients = current_app.config["MAIL_ADMINS"]
     body = None
-    html = render_template("email/message.j2", time=time, **kwargs)
+    html = render_template("email/message.j2", subject=subject, time=time, **kwargs)
     current_app.logger.info("Отправляем письмо админам")
     executor.add_default_done_callback(sendmail_callback)
     executor.submit(send_async_email, subject, recipients, sender, body, html)
@@ -67,14 +64,17 @@ def send_email(subject=None, **kwargs):
 def send_async_email(subject, recipients, sender, body=None, html=None):
     """
 
-    :param subject: param recipients:
-    :param sender: param body:  (Default value = None)
-    :param html: Default value = None)
-    :param recipients: param body:  (Default value = None)
-    :param body: Default value = None)
+    :param subject:
+    :param recipients:
+    :param sender:
+    :param body:  (Default value = None)
+    :param html: (Default value = None)
 
     """
     msg = Message(subject=subject, from_email=sender, to=recipients)
-    msg.body = body
-    msg.html = html
+    if body:
+        msg.body = body
+    else:
+        msg.body = html
+        msg.content_subtype = "html"
     msg.send()

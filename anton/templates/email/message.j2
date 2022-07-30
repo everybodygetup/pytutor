@@ -6,15 +6,7 @@
 
     {% if kwargs %}
       {% for field in kwargs %}
-        {% if field == 'service_title' %}
-          <h2>Новая заявка на оформление услуги «{{ kwargs[field] }}»</h2>
-        {% elif field == 'order_title' %}
-          <h2>Новый заказ: «{{ kwargs[field] }}»</h2>
-        {% elif field == 'link' %}
-          <p>Ссылка на заказ: {{ kwargs[field]|safe }}</p>
-        {% else %}
-          <p>{{ field }}: {{ kwargs[field] }}</p>
-        {% endif %}
+        <p>{{ field }}: {{ kwargs[field] }}</p>
       {% endfor %}
     {% endif %}
     <small>Время отправки: {{ time }}</small>
