@@ -14,22 +14,21 @@
 
      <!-- Header -->
           <header id="header" class="alt">
-            <h1><a href="index.html">Solid State</a></h1>
+            <h1><a href="index.html">ООО "ИМЯ"</a></h1>
             <nav>
-              <a href="#menu">Menu</a>
+              <a href="#menu">Меню</a>
             </nav>
           </header>
 
         <!-- Menu -->
           <nav id="menu">
             <div class="inner">
-              <h2>Menu</h2>
+              <h2>Меню</h2>
               <ul class="links">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('test') }}">Generic</a></li>
-                <li><a href="{{ url_for('elements') }}">Elements</a></li>
-                <li><a href="#">Log In</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('security.register') }}">Регистрация</a></li>
+                <li><a href="{{ url_for('security.login') }}">Вход в личный кабинет</a></li>
+                <li><a href="{{ url_for('security.logout') }}">Выход</a></li>
               </ul>
               <a href="#" class="close">Close</a>
             </div>
@@ -37,28 +36,15 @@
 
     {% block content %}{% endblock %}
 
-        <!-- Footer -->
+      </div>
+      <!-- Footer -->
           <section id="footer">
             <div class="inner">
-              <ul class="contact">
-                <li class="icon solid fa-home">
-                  Untitled Inc<br />
-                  1234 Somewhere Road Suite #2894<br />
-                  Nashville, TN 00000-0000
-                </li>
-                <li class="icon solid fa-phone">(000) 000-0000</li>
-                <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-                <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-                <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
-                <li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
-              </ul>
               <ul class="copyright">
                 <li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
               </ul>
             </div>
           </section>
-
-      </div>
 
     <!-- Scripts -->
       <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
