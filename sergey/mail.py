@@ -74,7 +74,10 @@ def send_async_email(subject, recipients, sender, body=None, html=None):
 
     """
     msg = Message(subject=subject, from_email=sender, to=recipients)
-    msg.body = body
-    msg.html = html
+    if body:
+        msg.body = body
+    else:
+        msg.body = html
+        msg.content_subtype = "html"
     msg.send()
 
