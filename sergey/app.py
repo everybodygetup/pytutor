@@ -67,9 +67,6 @@ def index():  # В шаблоне base через url_for передал фун�
              )
         db.session.add(user_db)
         db.session.commit()
-        user_list_db = UserSubmit.query.all()
-        for user in user_list_db:
-            print(user.id, user.name, user.email)
         return redirect(url_for('index'))
     return render_template("index.j2", page_title=page_title, form=form, index=True)
 
