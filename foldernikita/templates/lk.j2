@@ -1,0 +1,61 @@
+{% extends "base.j2" %}
+{% block content %}
+
+        <!-- Wrapper -->
+          <section id="wrapper" style="margin-left:5%;margin-right:5%">
+            <div class="inner">
+              <p>Личный кабинет: {{email}}</p>
+            </div>
+            <div class="inner">
+             <p> Контактные данные компании:</p>
+              <ul class="contact">
+                <li class="icon solid fa-home">
+                  {{company_contacts.adress}}
+                </li>
+                <li class="icon solid fa-phone">{{company_contacts.phone}}</li>
+                <li class="icon brands fa-facebook-f"><a href="#">{{company_contacts.telegram}}</a></li>
+                <li class="icon brands fa-instagram"><a href="#">{{company_contacts.instagram}}</a></li>
+              </ul>
+            </div>
+            <div class="inner">
+              <p> Редактирование контактных данных компании:</p>
+              <form method="post" action=" {{ url_for('lk') }}" novalidate>
+              {{ form.hidden_tag() }}
+                <div class="fields">
+                  <div class="field">
+                    {{ form.adress.label }}
+                    {{ form.adress(size=28, placeholder=form.adress.label.text) }}
+                    {% for error in form.adress.errors %}
+                      <span style="color: red;"> {{error}}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="field">
+                    {{ form.phone.label }}
+                    {{ form.phone(size=28, placeholder=form.phone.label.text) }}
+                    {% for error in form.phone.errors %}
+                      <span style="color: red;"> {{error}}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="field">
+                    {{ form.telegram.label }}
+                    {{ form.telegram(size=28, placeholder=form.telegram.label.text) }}
+                    {% for error in form.telegram.errors %}
+                      <span style="color: red;"> {{error}}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="field">
+                    {{ form.instagram.label }}
+                    {{ form.instagram(size=28, placeholder=form.instagram.label.text) }}
+                    {% for error in form.instagram.errors %}
+                      <span style="color: red;"> {{error}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+                <ul class="actions">
+                  <li>{{ form.submit() }}</li>
+                </ul>
+              </form>
+            </div>
+          </section>
+
+{% endblock %}

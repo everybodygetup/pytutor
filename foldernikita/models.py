@@ -1,9 +1,23 @@
-from app import db
+from extensions import db
 from datetime import datetime
 from sqlalchemy.sql import func
 
 from flask_security import RoleMixin, SQLAlchemyUserDatastore, UserMixin
 
+
+class Contacts(db.Model):
+    """Таблица с контактами сайта"""
+    id = db.Column(db.Integer, primary_key=True)
+    adress = db.Column(db.String(64), index=True)
+    phone = db.Column(db.String(64), index=True)
+    telegram = db.Column(db.String(64), index=True)
+    instagram = db.Column(db.String(64), index=True)
+
+class Ratings(db.Model):
+    """Таблица с оценками сайта"""
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, index=True)
+    comments = db.Column(db.String(64), index=True)
 
 class UserSubmit(db.Model):
     """Таблица заявок с формы обратной связи."""
@@ -54,6 +68,15 @@ class User(db.Model, UserMixin):
         server_default=func.now(),
         onupdate=datetime.utcnow,
     )
+
+    roles = db.relationship(
+        "Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic")
+    )
+
+    @property
+    def phone(self) -> str:
+        """Returns phone number if the user have."""
+        return "" if not self.us_phone_number else self.us_phone_number
 
 roles_users = db.Table(
     "roles_users",
