@@ -1,6 +1,9 @@
 bcrypt
 email_validator
 flask
+flask-babel
+flask-executor
+flask-mailman
 flask-migrate
 flask-security-too
 flask-sqlalchemy

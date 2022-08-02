@@ -1,0 +1,22 @@
+<html>
+  <body>
+    {% if subject %}
+      <h2>{{ subject }}</h2>
+    {% endif %}
+
+    {% if kwargs %}
+      {% for field in kwargs %}
+        {% if field == 'service_title' %}
+          <h2>Новая заявка на оформление услуги «{{ kwargs[field] }}»</h2>
+        {% elif field == 'order_title' %}
+          <h2>Новый заказ: «{{ kwargs[field] }}»</h2>
+        {% elif field == 'link' %}
+          <p>Ссылка на заказ: {{ kwargs[field]|safe }}</p>
+        {% else %}
+          <p>{{ field }}: {{ kwargs[field] }}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <small>Время отправки: {{ time }}</small>
+  </body>
+</html>
