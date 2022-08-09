@@ -8,7 +8,7 @@ from flask_security import current_user, login_required
 from extensions import db  # изменили обращение к db, теперь из папки расширений (extensions)
 from forms import Feedback
 from init import app
-from models import UserSubmit
+from models import UserSubmit, User, Role
 
 
 @app.before_first_request  # чтобы обращение было один раз (если хотим вводить данные постоянно - before_request)
@@ -24,6 +24,12 @@ def lk():
     email = current_user.email
     return f"Личный кабинет: {email}"
 
+@app.get("/admin/user/<int:user_id>/roles")  # создаем админку
+@login_required
+def admin_user_roles(user_id):
+    user_db = User.query.get(user_id)
+    roles_db = Role.query.all()
+    return render_template("admin/roles.j2", user=user_db, roles=roles_db)
 
 @app.route("/users")
 
