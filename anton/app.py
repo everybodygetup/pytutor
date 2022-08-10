@@ -10,6 +10,12 @@ from models import UserSubmit
 @app.before_first_request
 def init():
     db.create_all()
+    user_datastore.find_or_create_role(name="admin", permissions={"admin-read", "admin-write", "user-read", "user-write", "partner-read", "partner-write"})
+    user_datastore.find_or_create_role(name="monitor", permissions={"admin-read", "user-read"})
+    user_datastore.find_or_create_role(name="partner", permissions={"partner-read", "partner-write"})
+    user_datastore.find_or_create_role(name="user", permissions={"user-read", "user-write"})
+    user_datastore.find_or_create_role(name="reader", permissions={"user-read"})
+    db.session.commit()
 
 
 @app.route("/", methods=["GET", "POST"])
