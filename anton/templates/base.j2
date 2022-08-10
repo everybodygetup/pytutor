@@ -8,17 +8,34 @@
     <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}"></noscript>
   </head>
   <body class="is-preload{% if current_user.is_authenticated %} is-admin{% endif %}">
-    <header id="header">
-      <div class="content">
-        <h1><a href="#">{{ page_title }}</a></h1>
-        {# <p>Небольшое описание страницы</p> #}
-        <ul class="actions">
-          <li><a href="{{ url_for('index') }}" class="button primary icon solid fa-home">На главную</a></li>
-          <li><a href="{{ url_for('demo_form') }}" class="button icon solid fa-calendar scrolly">Отправить форму</a></li>
-        </ul>
-      </div>
-      <div class="image phone"><div class="inner"><img src="{{ url_for('static', filename='images/screen.jpg') }}" alt="" /></div></div>
-    </header>
+    <div class="top-menu">
+      {% set menu = [{
+        'view': 'index',
+        'title': 'Главная'
+      }, {
+        'view': 'demo_form',
+        'title': 'Тестовая форма'
+      }] %}
+      {% for link in menu %}
+        <a href="{{ url_for(link.view) }}">{{ link.title }}</a>
+      {% endfor %}
+      {% if 'admin' in current_user.roles %}
+        <a href="{{ url_for('admin') }}">Админка</a>
+      {% endif %}
+    </div>
+    {% if is_index %}
+      <header id="header">
+        <div class="content">
+          <h1><a href="#">{{ page_title }}</a></h1>
+          {# <p>Небольшое описание страницы</p> #}
+          <ul class="actions">
+            <li><a href="{{ url_for('index') }}" class="button primary icon solid fa-home">На главную</a></li>
+            <li><a href="{{ url_for('demo_form') }}" class="button icon solid fa-calendar scrolly">Отправить форму</a></li>
+          </ul>
+        </div>
+        <div class="image phone"><div class="inner"><img src="{{ url_for('static', filename='images/screen.jpg') }}" alt="" /></div></div>
+      </header>
+    {% endif %}
 
     {% block content %}{% endblock %}
 
