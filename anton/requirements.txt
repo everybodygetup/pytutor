@@ -1,4 +1,5 @@
 bcrypt
+cryptg
 email_validator
 flask
 flask-babel
@@ -10,3 +11,4 @@ flask-sqlalchemy
 flask-wtf
 python-dotenv
 python-slugify
+telethon

@@ -11,6 +11,17 @@
   z-index: 111;
 }
 
+.user-list {
+  text-align: left;
+  list-style-type: none;
+}
+
+.top-menu {
+  z-index: 222;
+  position: fixed;
+  padding: 20px;
+  background: #f7f7f7;
+}
 /*
 	Fractal by HTML5 UP
 	html5up.net | @ajlkn
