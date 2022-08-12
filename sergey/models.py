@@ -1,4 +1,3 @@
-from email import message
 from app import db
 
 from datetime import datetime
@@ -58,11 +57,6 @@ class User(db.Model, UserMixin):
     )
 
     roles = db.relationship("Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic"))
-
-    @property
-    def phone(self) -> str:
-        """Returns phone number if the user have."""
-        return "" if not self.us_phone_number else self.us_phone_number
 
 
 roles_users = db.Table(

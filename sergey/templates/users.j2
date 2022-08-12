@@ -2,15 +2,16 @@
 
 {% block content %}
   <section id="four" class="wrapper">
-  <h1>Зарегистрированные пользователи</h1>
-    <div class="inner">
-      <header class="major">
-        <ul style="text-align: left;font-size:20px">
+    <h1>Зарегистрированные пользователи</h1>
+    <div class="row">
+      <div class="col-6 col-12-medium">
+        <h4>Ordered</h4>
+        <ol>
           {% for user in users%}
-            <li><b>{{ user.id }}</b>: {{ user.name }} ({{ user.email }})</li>
+              <li>{{ user.id }}: {{ user.name }} ({{ user.email }})</li>
           {% endfor %}
-        </ul>
-      </header>
+        </ol>
+      </div>
     </div>
   </section>
 {% endblock %}
