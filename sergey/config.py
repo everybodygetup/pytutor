@@ -56,8 +56,8 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     DEV_SECRET_KEY = "y5gD_xpd+f6ahaF#o&*VCC)V&Adm2qt&"
     SECRET_KEY = os.getenv("SECRET_KEY", DEV_SECRET_KEY)
-    SQLALCHEMY_DATABASE_URI=f"sqlite:///{os.path.join(basedir, 'app.db')}",
-
+    SQLALCHEMY_DATABASE_URI=f"sqlite:///{os.path.join(basedir, 'app.db')}"
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 class TestingConfig(DevelopmentConfig):
     TESTING = True

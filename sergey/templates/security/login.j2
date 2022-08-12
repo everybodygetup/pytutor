@@ -2,20 +2,22 @@
 {% from 'macros/form.j2' import base, btn, checkbox, render_field_errors %}
 {% set meta_title = 'Авторизация' %}
 {% block content %}
-  <div class="main__jumbotron">
-    <h3 class="main__title">Вход в личный кабинет</h3>
-    <form class="form" action="{{ url_for_security('login') }}" method="post" name="login_user_form">
-      {{ login_user_form.hidden_tag() }}
-      {{ render_field_errors(login_user_form.csrf_token) }}
-      {{ base(login_user_form.email) }}
-      {{ base(login_user_form.password) }}
-      {{ btn(login_user_form.submit, value='Войти') }}
-      {{ checkbox(login_user_form.remember) }}
-      <p class="main__text"><a href="{{ url_for_security('forgot_password') }}">Забыли пароль?</a></p>
-    </form>
-    <footer class="main__footer">
-      <p class="main__text">Ещё не зарегистрировались? <a href="{{ url_for_security('register') }}">Регистрация</a></p>
-    </footer>
+  <div class="wrapper">
+    <div class="inner">
+      <h3 class="main__title">Вход в личный кабинет</h3>
+      <form class="form" action="{{ url_for_security('login') }}" method="post" name="login_user_form">
+        {{ login_user_form.hidden_tag() }}
+        {{ render_field_errors(login_user_form.csrf_token) }}
+        {{ base(login_user_form.email) }}
+        {{ base(login_user_form.password) }}
+        {{ btn(login_user_form.submit, value='Войти') }}
+        {{ checkbox(login_user_form.remember) }}
+        <p class="main__text"><a href="{{ url_for_security('forgot_password') }}">Забыли пароль?</a></p>
+      </form>
+      <footer class="main__footer">
+        <p class="main__text">Ещё не зарегистрировались? <a href="{{ url_for_security('register') }}">Регистрация</a></p>
+      </footer>
+    </div>
   </div>
 {% endblock %}
 

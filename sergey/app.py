@@ -14,13 +14,13 @@ from models import UserSubmit, User, Role, user_datastore
 @app.before_first_request  # чтобы обращение было один раз (если хотим вводить данные постоянно - before_request)
 def init():
     db.create_all()
-""" user_datastore.create_role(name='admin', permissions={'admin-write', 'admin-read'})
-    user_datastore.create_role(name='user', permissions={'user-write', 'user-read'})
-    db.session.commit()"""
+    # user_datastore.create_role(name='admin', permissions={'admin-write', 'admin-read'})
+    # user_datastore.create_role(name='user', permissions={'user-write', 'user-read'})
+    # db.session.commit()
 
 @app.get("/admin") # делаем личный кабинет
 @login_required
-@roles_required('admin')
+# @roles_required('admin')
 def admin():
     return render_template("admin/index.j2")
 
@@ -39,15 +39,15 @@ def admin_user_roles(user_id):
     roles_db = Role.query.all()
     return render_template("admin/roles.j2", user=user_db, roles=roles_db)
 
-@app.get("/admin/user/<int:user_id>/<int:roles_id>/add")
+@app.get("/admin/user/<int:user_id>/<int:role_id>/add")
 @roles_required('admin')
-def admin_user_add_role(user_id, role_id):
+def admin_user_role_add(user_id, role_id):
     """Добавление роли пользователю."""
     user_db = User.query.get_or_404(user_id)
     role_db = Role.query.get_or_404(role_id)
     user_datastore.add_role_to_user(user_db, role_db)
     db.session.commit()
-    return redirect(url_for('admin_user_roles, user_id=user_id'))
+    return redirect(url_for('admin_user_roles', user_id=user_id))
 
 @app.route("/users")
 def users():
