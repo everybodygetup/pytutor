@@ -1,0 +1,16 @@
+{% extends "base.j2" %}
+
+{% block content %}
+  <section id="one" class="wrapper">
+    <header class="major">
+      <h2>Личный кабинет</h2>
+    </header>
+    <div class="inner">
+      <h3>Пользователь</h3>
+      <p>email: {{ current_user.email }}</p>
+      <ul class="major">
+        <li><a href="{{ url_for('admin') }}"><i class="icon solid fa-users"></i> Перейти в админку</a></li>
+      </ul>
+    </div>
+  </section>
+{% endblock %}
