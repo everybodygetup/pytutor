@@ -70,8 +70,8 @@ def test_mail():
 def lk():
     """Личный кабинет."""
     page_title = "Личный кабинет"
-    email = current_user.email
-    return f"Личный кабинет: {email}"
+
+    return render_template('lk/index.j2')
 
 
 @app.route("/test")
