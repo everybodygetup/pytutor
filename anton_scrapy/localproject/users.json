@@ -1,0 +1,12 @@
+[
+{"id": "1", "name": "Anton", "email": "a@a.aa"},
+{"id": "2", "name": "Anton2", "email": "b@b.bb"},
+{"id": "3", "name": "\u0418\u043c\u044f \u0424\u0430\u043c\u0438\u043b\u0438\u044f", "email": "anton@z-gu.ru"},
+{"id": "4", "name": "aa", "email": "admin@z-gu.ru"},
+{"id": "5", "name": "\u0421\u0435\u0440\u0433\u0435\u0439", "email": "serg@example.com"},
+{"id": "6", "name": "\u0418\u0432\u0430\u043d \u041f\u0435\u0442\u0440\u043e\u0432", "email": "iv@iv"},
+{"id": "7", "name": null, "email": "a@zxc.as"},
+{"id": "8", "name": null, "email": "zxc@zxc.ee"},
+{"id": "9", "name": "Polzovatel 777 Privet", "email": "zxc@qwe.ru"},
+{"id": "10", "name": "Anton Popov", "email": "ademaro@mail.ru"}
+]
