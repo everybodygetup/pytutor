@@ -6,28 +6,33 @@
       <h2>Список пользователей</h2>
     </header>
     <div class="inner">
-      <table>
-        <tr>
-          <th>ID</th><th>Email</th><th>UserName</th><th>Роли</th><th>Дата подтверждения</th>
-        </tr>
-        {% for user in users %}
+      <div class="table-wrapper">
+        <table class="alt">
+        <thead>
           <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.email }}</td>
-            <td><i class="icon solid fa-user"></i> {{ user.username }}</td>
-            <td>
-              [
-              {% for role in user.roles %}
-                {{ role.name }}
-              {% endfor %}
-              ]
-              <a href="{{ url_for('admin_user_roles', user_id=user.id) }}">изменить</a>
-            </td>
-            <td>{{ user.confirmed_at }}</td>
+            <th>ID</th><th>Email</th><th>Имя пользователя</th><th>Роли</th><th>Дата подтверждения</th>
           </tr>
-        {% endfor %}
-      </table>
-
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.email }}</td>
+              <td><i class="icon solid fa-user"></i> {{ user.username }}</td>
+              <td>
+                [
+                {% for role in user.roles %}
+                  {{ role.name }}
+                {% endfor %}
+                ]
+                <a href="{{ url_for('admin_user_roles', user_id=user.id) }}">изменить</a>
+              </td>
+              <td>{{ user.confirmed_at }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+      </div>
     </div>
   </section>
 {% endblock %}

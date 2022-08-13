@@ -4,8 +4,8 @@
   <section id="four" class="wrapper">
     <div class="inner">
       <header class="major">
-        <ul style="text-align: left;font-size:26px">
-          {% for user in users%}
+        <ul style="text-align:left;font-size:26px">
+          {% for user in users %}
             <li><b>{{ user.id }}</b>: {{ user.name }} ({{ user.email }})</li>
           {% endfor %}
         </ul>
