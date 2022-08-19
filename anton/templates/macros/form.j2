@@ -1,3 +1,13 @@
+{% macro render_input(field) %}
+  <label>
+    {{ field.label.text }}
+    {{ field(size=32, placeholder=field.label.text) }}
+  </label>
+  {% for error in field.errors %}
+    <span style="color: red;">{{ error }}</span>
+  {% endfor %}
+{% endmacro %}
+
 {% macro errors(errors, bem_block='form') -%}
   {% if errors %}
     <ul class="{{ bem_block }}__errors">
