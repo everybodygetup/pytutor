@@ -58,6 +58,24 @@ def admin_user_role_add(user_id, role_id):
     return redirect(url_for('admin_user_roles', user_id=user_id))
 
 
+@app.get("/admin/user/<int:user_id>/<int:role_id>/remove")
+@roles_required("admin")
+def admin_user_role_remove(user_id, role_id):
+    """Удаление роли пользователя."""
+    user_db = User.query.get_or_404(user_id)
+    role_db = Role.query.get_or_404(role_id)
+    if role_db.name == "admin" and user_db == current_user:
+        flash("Админу нельзя снять админские права самому себе", "danger")
+    else:
+        user_datastore.remove_role_from_user(user_db, role_db)
+        db.session.commit()
+        flash(
+            f"Успешно удалена роль «{role_db.name}» пользователю «{user_db.email}»",
+            "success",
+        )
+    return redirect(url_for("admin_user_roles", user_id=user_id))
+
+
 @app.route("/mail", methods=["GET", "POST"])
 def test_mail():
     page_title = "Главная"
