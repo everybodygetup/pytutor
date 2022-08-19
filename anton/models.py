@@ -64,7 +64,7 @@ class User(db.Model, UserMixin):
     @property
     def phone(self) -> str:
         """Returns phone number if the user have."""
-        return "" if not self.us_phone_number else self.us_phone_number
+        return self.us_phone_number or ""
 
 
 roles_users = db.Table(
