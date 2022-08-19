@@ -2,19 +2,24 @@
 
 {% block content %}
   <section id="one" class="wrapper style2 special">
-    <header class="major">
-      <h2>Изменение ролей для пользователя {{ user.email }}</h2>
-    </header>
+    {{ super() }}
     <div class="inner">
-      Доступные:<br>
-      {% for role in roles %}
-        <a href="{{ url_for('admin_user_role_add', user_id=user.id, role_id=role.id) }}">{{ role.name }}</a><br>
-      {% endfor %}
-
-      <br>У пользователя:<br>
-      {% for role in user.roles %}
-        {{ role.name }}<br>
-      {% endfor %}
+      <div class="row">
+        <div class="col-6">
+          <h3>Доступные (добавить):</h3>
+          {% for role in roles %}
+            {% if role not in user.roles %}
+              <a href="{{ url_for('admin_user_role_add', user_id=user.id, role_id=role.id) }}">{{ role.name }}</a><br>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="col-6">
+          <h3>У пользователя (удалить):</h3>
+          {% for role in user.roles %}
+            <a href="{{ url_for('admin_user_role_remove', user_id=user.id, role_id=role.id) }}">{{ role.name }}</a><br>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </section>
 {% endblock %}

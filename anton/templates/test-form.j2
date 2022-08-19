@@ -1,22 +1,10 @@
-{% extends "base.j2" %}
-
-{% macro render_input(field) %}
-  <label>
-    {{ field.label.text }}
-    {{ field(size=32, placeholder=field.label.text) }}
-  </label>
-  {% for error in field.errors %}
-    <span style="color: red;">{{ error }}</span>
-  {% endfor %}
-{% endmacro %}
+{% extends 'base.j2' %}
+{% from 'macros/form.j2' import render_input %}
 
 {% block content %}
   <section id="four" class="wrapper">
+    {{ super() }}
     <div class="inner">
-      <header class="major">
-        <h2>Демо-Форма</h2>
-      </header>
-
       <section>
         <h4>Заполни как к тебе обращаться и email:</h4>
         <form method="post" action="{{ url_for('demo_form') }}" novalidate>
@@ -70,7 +58,6 @@
             <div class="col-12">
               <ul class="actions">
                 <li>{{ form.submit(class="primary") }}</li>
-                {# <li><input type="submit" value="Send Message" class="primary" /></li> #}
                 <li><input type="reset" value="Сбросить форму" /></li>
               </ul>
             </div>

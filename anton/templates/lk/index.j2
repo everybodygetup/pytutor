@@ -2,14 +2,15 @@
 
 {% block content %}
   <section id="one" class="wrapper">
-    <header class="major">
-      <h2>Личный кабинет</h2>
-    </header>
+    {{ super() }}
     <div class="inner">
       <h3>Пользователь</h3>
-      <p>email: {{ current_user.email }}</p>
-      <ul class="major">
-        <li><a href="{{ url_for('admin') }}"><i class="icon solid fa-users"></i> Перейти в админку</a></li>
+      <ul>
+        <li><strong>Email</strong>: {{ current_user.email }}</li>
+        <li><strong>Дата регистрации</strong>: {{ current_user.create_datetime }}</li>
+        <li><strong>Дата активации</strong>: {{ current_user.confirmed_at }}</li>
+        <li><strong>Дата изменения</strong>: {{ current_user.update_datetime }}</li>
+        <li><strong>Роли пользователя</strong> ({{ current_user.roles | count }}): {% for role in current_user.roles %}{{ role.name }}{% if not loop.last %}, {% endif %}{% endfor %}</li>
       </ul>
     </div>
   </section>
