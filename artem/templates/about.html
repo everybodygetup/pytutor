@@ -1,0 +1,108 @@
+{% extends "base.html" %} {% block content %}
+
+
+<section id="wrapper" class="wrapper">
+  <header>
+    <div class="inner">
+      <h2>Обо мне</h2>
+      <p>Информация об учебе и профессиональной подготовке</p>
+    </div>
+  </header>
+
+
+  <section id="three" class="wrapper spotlight style3">
+  <div class="inner">
+    <a href="#" class="image"
+      ><img src="{{ url_for('static', filename='images/pers/2.jpg') }}" alt=""
+    /></a>
+    <div class="content">
+      <h2 class="major">Профессиональная переподготовка</h2>
+      <p>
+        ГБОУВПО "Санкт-Петербургский государственный педиатрический медицинский
+        университет", 2017, Травматология и ортопедия
+      </p>
+      <h2 class="major">Высшее образование - специалитет, магистратура</h2>
+      <p>
+        ГБОУВПО "Санкт-Петербургский государственный педиатрический медицинский
+        университет", 2016, Педиатрия
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Three -->
+<section id="three" class="wrapper spotlight style3">
+  <div class="inner">
+    <a href="#" class="image"
+      ><img src="{{ url_for('static', filename='images/pers/1.JPG') }}" alt=""
+    /></a>
+    <div class="content">
+      <h2 class="major">Ортопедия для взрослых</h2>
+      <p>
+        Консультации и безоперационное лечение пациентов с травмами и
+        последствиями травм, с заболеваниями суставов и позвоночника, лечение
+        острой боли в суставах, позвоночнике, мышцах, связках, стопах.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- swapper -->
+<section class="popular">
+  <div class="popular__container">
+    <h2 class="popular__title title">Сертификаты и дипломы</h2>
+    {% set certificates = [{
+      'filename': 'slider/1.jpg',
+      'title': 'Диплом об окончании ординатуры',
+    }, {
+      'filename': 'slider/2.jpg',
+      'title': 'Диплом специалиста',
+    }, {
+      'filename': 'slider/3.jpg',
+      'title': 'Диплом о послевузовском профессиональном образовании',
+    }, {
+      'filename': 'slider/4.jpg',
+      'title': 'Удостоверение о повышении квалификации',
+      'text': 'Методика локальной инъекционной терапии болевых синдромов осевого скелета'
+    }, {
+      'filename': 'slider/5.jpg',
+      'title': 'Диплом об окончании ординатуры',
+      'text': 'Профессиональная переподготовка &laquo;Медицинский массаж&raquo;'
+    }] %}
+    <div class="popular__slider">
+      <div class="swiper popular-slider">
+        <div class="swiper-wrapper">
+          {% for certificate in certificates %}
+            <div class="swiper-slide popular-slide">
+              <div class="popular-slide__thumb">
+                <img src="{{ url_for('static', filename='images/%s' % certificate.filename )}}" alt="" />
+              </div>
+              <div class="popular-slide__text text-light">
+                <div class="popular-slide__title">
+                  {{ certificate.title }}
+                </div>
+                <div class="popular-slide__desc text"> {{ certificate.text | safe }}</div>
+              </div>
+              <div class="popular-slide__labels">
+                <div class="popular-slide__label"></div>
+                <div class="popular-slide__label"></div>
+                <div class="popular-slide__label"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="slider-buttons">
+        <div
+          class="popular-slider-btn popular-slider-prev swiper-button-prev"
+        ></div>
+        <div
+          class="popular-slider-btn popular-slider-next swiper-button-next"
+        ></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -12,18 +12,21 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/main.css') }}"
     />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/noscript.css') }}"
-    /></noscript>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/noscript.css') }}"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/swiper.js"></script>
+    <script defer src="/static/js/script.js"></script>
   </head>
+
   <body class="is-preload">
     <!-- Page Wrapper -->
     <div id="page-wrapper">
       <!-- Header -->
       <header id="header" class="alt">
-        <h1><a href="index.html">Главная страница</a></h1>
+        <h1><a href="{{ url_for('index') }}">Главная страница</a></h1>
         <nav>
           <a href="#menu">Меню</a>
         </nav>
@@ -34,8 +37,8 @@
           <h2>Навигация</h2>
           <ul class="links">
             <li><a href="{{ url_for('index') }}">Главная</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
+            <li><a href="{{ url_for('about') }}">Обо мне</a></li>
+            <li><a href="{{ url_for('price') }}">Цены</a></li>
             <li><a href="{{ url_for_security('login') }}">Войти</a></li>
             <li><a href="{{ url_for_security('register') }}">Регистрация</a></li>
           </ul>
@@ -49,37 +52,37 @@
       <section id="footer">
         <div class="inner">
           {% if form %}
-            <h2 class="major">Свяжитесь с нами</h2>
-            <p>Отправить сообщение</p>
-            <form method="post" action="{{ url_for('index') }}" novalidate>
-              {{ form.hidden_tag() }}
-              <div class="fields">
-                <div class="field">
-                  {{ form.name.label }} {{ form.name(size=32,
-                  placeholder=form.name.label.text) }} {% for error in
-                  form.name.errors %}
-                  <span style="color: red">{{ error }}</span>
-                  {% endfor %}
-                </div>
-                <div class="field">
-                  {{ form.email.label }} {{ form.email(size=32,
-                  placeholder=form.email.label.text) }} {% for error in
-                  form.email.errors %}
-                  <span style="color: red">{{ error }}</span>
-                  {% endfor %}
-                </div>
-                <div class="field">
-                  {{ form.message.label }} {{ form.message(size=32,
-                  placeholder=form.message.label.text) }} {% for error in
-                  form.message.errors %}
-                  <span style="color: red">{{ error }}</span>
-                  {% endfor %}
-                </div>
+          <h2 class="major">Свяжитесь с нами</h2>
+          <p>Отправить сообщение</p>
+          <form method="post" action="{{ url_for('index') }}" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="fields">
+              <div class="field">
+                {{ form.name.label }} {{ form.name(size=32,
+                placeholder=form.name.label.text) }} {% for error in
+                form.name.errors %}
+                <span style="color: red">{{ error }}</span>
+                {% endfor %}
               </div>
-              <ul class="actions">
-                <li><input type="submit" value="Отправить сообщение" /></li>
-              </ul>
-            </form>
+              <div class="field">
+                {{ form.email.label }} {{ form.email(size=32,
+                placeholder=form.email.label.text) }} {% for error in
+                form.email.errors %}
+                <span style="color: red">{{ error }}</span>
+                {% endfor %}
+              </div>
+              <div class="field">
+                {{ form.message.label }} {{ form.message(size=32,
+                placeholder=form.message.label.text) }} {% for error in
+                form.message.errors %}
+                <span style="color: red">{{ error }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            <ul class="actions">
+              <li><input type="submit" value="Отправить сообщение" /></li>
+            </ul>
+          </form>
           {% endif %}
           <ul class="contact">
             <li class="icon solid fa-home">
@@ -90,16 +93,13 @@
             <li class="icon solid fa-envelope">
               <a href="#">information@untitled.tld</a>
             </li>
-            <li class="icon brands fa-twitter">
+            <li class="icon brands fa-vk">
               <a href="#">twitter.com/untitled-tld</a>
             </li>
-            <li class="icon brands fa-facebook-f">
+            <li class="icon brands fa-telegram">
               <a href="#">facebook.com/untitled-tld</a>
             </li>
-            <li class="icon brands fa-instagram">
-              <a href="#">instagram.com/untitled-tld</a>
-            </li>
-          </ul>
+
           <ul class="copyright">
             <li>&copy; Belyakoff Inc. All rights reserved.</li>
             <li>Design: <a href="https://t.me/everybodygetup">Belyakoff</a></li>
@@ -109,6 +109,7 @@
     </div>
 
     <!-- Scripts -->
+
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>

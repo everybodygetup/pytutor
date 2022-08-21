@@ -1,15 +1,15 @@
-{% extends "base.html" %}
-
-{% block content %}
-  <section id="four" class="wrapper">
-    <div class="inner">
-      <header class="major">
-        <ul style="text-align: left;font-size:26px">
-          {% for user in users%}
-            <li><b>{{ user.id }}</b>: {{ user.name }} ({{ user.email }})</li>
-          {% endfor %}
-        </ul>
-      </header>
+{% extends "base.html" %} {% block content %}
+<section id="four" class="wrapper">
+  <h1>Зарегистрированные пользователи</h1>
+  <div class="row">
+    <div class="col-6 col-12-medium">
+      <h4>Список</h4>
+      <ol>
+        {% for user in users%}
+        <li>{{ user.id }}: {{ user.name }} ({{ user.email }})</li>
+        {% endfor %}
+      </ol>
     </div>
-  </section>
+  </div>
+</section>
 {% endblock %}

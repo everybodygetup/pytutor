@@ -1,11 +1,11 @@
 from flask import render_template, redirect, request,url_for
 
-from flask_security import current_user, login_required
+from flask_security import current_user, login_required, roles_required
 from mail import send_email
 from init import app
 from extensions import db
 from forms import DemoForm
-from models import UserSubmit
+from models import UserSubmit, User, Role, user_datastore
 
 
 
@@ -36,6 +36,37 @@ def create_tables():
     db.create_all()
 
 
+@app.get("/admin") # делаем личный кабинет
+@login_required
+# @roles_required('admin')
+def admin():
+    return render_template("admin/index.html")
+
+@app.get("/admin/users")
+# @roles_required('admin')
+def admin_users():
+    """Показ всех пользователей."""
+    user_list_db = User.query.all()
+    return render_template("admin/users.html", users=user_list_db)
+
+@app.get("/admin/user/<int:user_id>/roles")
+# @roles_required('admin')
+def admin_user_roles(user_id):
+    """Показываем роли для конкретного пользователя."""
+    user_db = User.query.get_or_404(user_id)
+    roles_db = Role.query.all()
+    return render_template("admin/roles.html", user=user_db, roles=roles_db)
+
+@app.get("/admin/user/<int:user_id>/<int:role_id>/add")
+# @roles_required('admin')
+def admin_user_role_add(user_id, role_id):
+    """Добавление роли пользователю."""
+    user_db = User.query.get_or_404(user_id)
+    role_db = Role.query.get_or_404(role_id)
+    user_datastore.add_role_to_user(user_db, role_db)
+    db.session.commit()
+    return redirect(url_for('admin_user_roles', user_id=user_id))
+
 @app.get("/lk")
 @login_required
 def lk():
@@ -60,9 +91,20 @@ def users():
     return render_template("users.html", page_title=page_title, users=user_list_db)
 
 
+
 @app.route('/test')
 def test():
     return render_template('test.html')
+
+@app.route("/about")
+def about():
+    page_title = 'Обо мне'
+    return render_template('about.html', page_title=page_title)
+
+@app.route("/price")
+def price():
+    page_title = 'Цены'
+    return render_template('price.html', page_title=page_title)
 
 
 @app.route('/services/<service_name>')

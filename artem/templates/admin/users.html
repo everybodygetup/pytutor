@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<section id="one" class="wrapper style2 special">
+  <header class="major">
+    <h2>Список пользователей</h2>
+  </header>
+  <div class="inner">
+    <div class="table-wrapper">
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>UserName</th>
+          <th>Роли</th>
+          <th>Дата подтверждения</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td><i class="icon solid fa-user"></i> {{ user.username }}</td>
+          <td>
+            [ {% for role in user.roles %} {{ role.name }} {% endfor %} ]
+            <a href="{{ url_for('admin_user_roles', user_id=user.id) }}"
+              >изменить</a
+            >
+          </td>
+          <td>{{ user.confirmed_at }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
