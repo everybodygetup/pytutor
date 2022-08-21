@@ -7,11 +7,13 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:
+    """Базовая конфигурация."""
+
     APP_NAME = "Present one"
     BABEL_DEFAULT_LOCALE = "ru"
     LANGUAGES = ["en", "ru"]
     # Вписываем почту для админов, можно несколько через запятую
-    MAIL_ADMINS = ["youshkoff@yandex.ru"]
+    MAIL_ADMINS = ["youshkoff@yandex.ru", "admin@z-gu.ru"]
 
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 465))
@@ -56,8 +58,9 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     DEV_SECRET_KEY = "y5gD_xpd+f6ahaF#o&*VCC)V&Adm2qt&"
     SECRET_KEY = os.getenv("SECRET_KEY", DEV_SECRET_KEY)
-    SQLALCHEMY_DATABASE_URI=f"sqlite:///{os.path.join(basedir, 'app.db')}"
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'app.db')}"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class TestingConfig(DevelopmentConfig):
     TESTING = True
@@ -72,12 +75,15 @@ class ProductionConfig(BaseConfig):
     DB_PORT = os.getenv("DB_PORT", "3306")
     DB_NAME = os.getenv("DB_NAME")
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = f"{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = (
+        f"{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_size": 10,
         "pool_recycle": 3600,
         "pool_pre_ping": True,
     }
+
 
 config = {
     "development": DevelopmentConfig,

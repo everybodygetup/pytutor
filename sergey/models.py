@@ -1,15 +1,17 @@
-from app import db
-
 from datetime import datetime
-from sqlalchemy.sql import func
 
 from flask_security import RoleMixin, SQLAlchemyUserDatastore, UserMixin
+from sqlalchemy.sql import func
+
+from app import db
+
 
 class UserSubmit(db.Model):
     """Таблица заполненных форм (для БД)."""
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(64), index = True)
-    email = db.Column(db.String(120), index = True)
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), index=True)
+    email = db.Column(db.String(120), index=True)
 
 
 class Role(db.Model, RoleMixin):
@@ -56,7 +58,9 @@ class User(db.Model, UserMixin):
         onupdate=datetime.utcnow,
     )
 
-    roles = db.relationship("Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic"))
+    roles = db.relationship(
+        "Role", secondary="roles_users", backref=db.backref("users", lazy="dynamic")
+    )
 
 
 roles_users = db.Table(

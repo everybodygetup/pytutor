@@ -1,4 +1,3 @@
-from concurrent.futures import Executor
 import os
 
 from flask import Flask
@@ -15,7 +14,8 @@ app.config.from_object(config[os.getenv("FLASK_ENV", "production")])
 babel.init_app(app)
 executor.init_app(app)
 mail.init_app(app)
-"""Добавляем базу данных и механизм миграции."""
-db.init_app(app)
+db.init_app(app)  # Добавляем базу данных и механизм миграции.
 migrate.init_app(app, db)
-security.init_app(app, user_datastore, mail_util_cls=SecMailUtil)  # добавили хранилище данных пользователей
+security.init_app(
+    app, user_datastore, mail_util_cls=SecMailUtil
+)  # добавили хранилище данных пользователей

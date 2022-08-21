@@ -7,14 +7,10 @@ from flask_security import MailUtil
 
 
 def sendmail_callback(future):
-    """
-
-    :param future:
-
-    """
     print(
         f"{datetime.now()} => Почта {'успешно' if future.done() else 'не'} отправлена"
     )
+
 
 class SecMailUtil(MailUtil):
     """Кастомный класс для отправки почты для flask-security."""
@@ -24,8 +20,8 @@ class SecMailUtil(MailUtil):
     ):
         """Send an email via the Flask-Mailing extension.
 
-        :param template:
-        :param subject:
+        :param template: шаблон для от правки письма
+        :param subject: заголовок письма
         :param recipient:
         :param sender:
         :param body: param html:
@@ -46,6 +42,8 @@ class SecMailUtil(MailUtil):
         executor.submit(send_async_email, subject, recipients, sender, body, html)
 
     # запускаем функцию отправки почты
+
+
 def send_email(subject=None, **kwargs):
     """
 
@@ -80,4 +78,3 @@ def send_async_email(subject, recipients, sender, body=None, html=None):
         msg.body = html
         msg.content_subtype = "html"
     msg.send()
-
