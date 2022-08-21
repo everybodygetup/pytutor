@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:regular,500,600&display=swap");
+
+.form__errors {color:red;}
 * {
   margin: 0;
   padding: 0;
