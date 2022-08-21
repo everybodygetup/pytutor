@@ -9,15 +9,15 @@
 {%- endmacro %}
 
 {% macro base(field, bem_block='form', floating_label=True) -%}
-  <div class="{{ bem_block }}__control{% if floating_label %} {{ bem_block }}__control--floating{% endif %}{% if field.errors %} form__control--error{% endif %}">
-    {{ field(class='%s__text' % bem_block, placeholder=field.label.text, **kwargs) }}
+  <div class="field">
     {{ field.label(class='%s__label' % bem_block) }}
+    {{ field(class='%s__text' % bem_block, placeholder=field.label.text, **kwargs) }}
     {{ errors(field.errors) }}
   </div>
 {%- endmacro %}
 
 {% macro checkbox(field, bem_block='form') -%}
-  <div class="{{ bem_block }}__control {{ bem_block }}__control--checkbox{% if field.errors %} {{ bem_block }}__control--error{% endif %}">
+  <div class="field">
     {{ field(class='%s__checkbox' % bem_block) }}
     {{ field.label(class='%s__label' % bem_block, **kwargs) }}
     {{ errors(field.errors) }}
@@ -32,8 +32,10 @@
   </div>
 {%- endmacro %}
 
-{% macro btn(field, bem_block='form') %}
-  {{ field(class='%s__submit' % bem_block, **kwargs)|safe }}
+{% macro btn(field) %}
+  <div class="field">
+    {{ field(**kwargs)|safe }}
+  </div>
 {% endmacro %}
 
 {% macro raw(field) %}
