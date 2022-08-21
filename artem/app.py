@@ -99,7 +99,25 @@ def test():
 @app.route("/about")
 def about():
     page_title = 'Обо мне'
-    return render_template('about.html', page_title=page_title)
+    certificates = [{
+      'filename': 'slider/1.jpg',
+      'title': 'Диплом об окончании ординатуры',
+    }, {
+      'filename': 'slider/2.jpg',
+      'title': 'Диплом специалиста',
+    }, {
+      'filename': 'slider/3.jpg',
+      'title': 'Диплом о послевузовском профессиональном образовании',
+    }, {
+      'filename': 'slider/4.jpg',
+      'title': 'Удостоверение о повышении квалификации',
+      'text': 'Методика локальной инъекционной терапии болевых синдромов осевого скелета'
+    }, {
+      'filename': 'slider/5.jpg',
+      'title': 'Диплом об окончании ординатуры',
+      'text': 'Профессиональная переподготовка &laquo;Медицинский массаж&raquo;'
+    }]
+    return render_template('about.html', page_title=page_title, certificates=certificates)
 
 @app.route("/price")
 def price():
