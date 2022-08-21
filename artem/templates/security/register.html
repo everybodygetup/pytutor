@@ -6,15 +6,17 @@
     <div class="inner">
       <h3 class="main__title">Регистрация</h3>
       <form class="form" action="{{ url_for_security('register') }}" method="post" name="register_user_form">
-        {{ register_user_form.hidden_tag() }}
-        {{ render_field_errors(register_user_form.csrf_token) }}
-        {{ base(register_user_form.email) }}
-        {{ base(register_user_form.password) }}
-        {% if register_user_form.password_confirm %}
-          {{ base(register_user_form.password_confirm, placeholder='Подтверждение пароля', modifier='pass') }}
-        {% endif %}
-        {{ btn(register_user_form.submit, value='Зарегистрироваться') }}
-        <p class="main__text">Уже зарегистрированы? <a href="{{ url_for_security('login') }}">Войти</a></p>
+        <div class="fields">
+          {{ register_user_form.hidden_tag() }}
+          {{ render_field_errors(register_user_form.csrf_token) }}
+          {{ base(register_user_form.email) }}
+          {{ base(register_user_form.password) }}
+          {% if register_user_form.password_confirm %}
+            {{ base(register_user_form.password_confirm, placeholder='Подтверждение пароля', modifier='pass') }}
+          {% endif %}
+          {{ btn(register_user_form.submit, value='Зарегистрироваться') }}
+        </div>
+        <p class="field">Уже зарегистрированы? <a href="{{ url_for_security('login') }}">Войти</a></p>
       </form>
       <footer class="main__footer">
         {# <p class="main__text"><a href="{{ url_for_security('send_confirmation') }}">Подтверждение регистрации</a></p> #}
