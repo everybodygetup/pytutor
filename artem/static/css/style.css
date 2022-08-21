@@ -894,3 +894,23 @@ body._lock {
 }
 
 /*--------------------/Footer--------------------*/
+
+
+.index-about {
+  display: flex;
+}
+@media (max-width: 576px) {
+  .index-about {
+    display: block;
+  }
+  .wrapper.spotlight:nth-child(2n-1) .inner {
+    display: block;
+  }
+}
+.index-about .image {
+  min-width: 35%;
+}
+.index-about .image img {
+  max-width: 100%;
+  margin-top: -45px;
+}
