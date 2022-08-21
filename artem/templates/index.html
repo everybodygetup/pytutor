@@ -3,59 +3,50 @@
 
 {% block content %}
 
-       <!-- Banner -->
- <section id="banner">
-   <div class="inner">
-     <a href="#" class="image"><img src="{{ url_for('static', filename='images/pers/5.png') }}" alt="" /></a>
-    <div class="content">
-     <h2>Врач-травматолог-ортопед Лихачевский Руслан</h2>
-  </div>
- </section>
+  <section id="banner">
+    <div class="inner index-about">
+      <a href="#" class="image"><img src="{{ url_for('static', filename='images/pers/5.png') }}" alt="" /></a>
+      <div class="content">
+        <h2>Врач-травматолог-ортопед Лихачевский Руслан</h2>
+        <p>Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки. Много разного текста для проверки.</p>
+      </div>
+    </div>
+  </section>
 
-          <!-- Wrapper -->
-    <section id="wrapper">
-
-      <!-- One -->
-        <section id="one" class="wrapper spotlight style1">
-          <div class="inner">
-            <a class="image"><img src="{{ url_for('static', filename='images/logo.jpg')}}" alt="" /></a>
-            <div class="content">
-      <h2 class="major">Консультация травматолога</h2>
-      <p>Первичный прием квалифицированного специалиста в области травматологии, осуществляемый для постановки диагноза и определения тактики лечения при переломах, ушибах, надрывах и разрывах связок, сухожилий и мышц, последствиях травм опорно-двигательного аппарата. Выполняется в условиях травмпункта или приемного покоя, включает в себя первичные диагностические мероприятия и проведение неотложных манипуляций, чаще производится в экстренном порядке. При необходимости врач назначает дополнительные обследования (обычно – рентгенографию, реже – КТ, артроскопию, МРТ) и консультации смежных специалистов.</p>
-      <a href="{{ url_for('about') }}" class="special">Подробно обо мне</a>
-            </div>
-          </div>
-        </section>
-
-
-
-
-
-
-      <!-- Four -->
-        <section id="four" class="wrapper alt style1">
-          <div class="inner">
-            <h2 class="major">Оказываемые услуги</h2>
-            <p> <!--Ввести текст позже--></p>
-            <section class="features">
-              {% for service in services %}
-                <article>
-                  <a href="{{ url_for('services', service_name=service.alias) }}" class="image">
-                    <img src="{{ url_for('static', filename=service.image) }}" alt="Изображение услуги {{ service.title }}" style="margin: auto;" />
-                  </a>
-                  <h3 class="major">{{ service.title }}</h3>
-                  {% if service.text %}
-                    <p>{{ service.text }}</p>
-                  {% endif %}
-                  <a href="{{ url_for('services', service_name=service.alias) }}" class="special">Подробнее</a>
-                </article>
-              {% endfor %}
-            </section>
-            <ul class="actions">
-              <li><a href="#" class="button">Посмотреть все</a></li>
-            </ul>
-          </div>
-        </section>
-
+  <section id="wrapper">
+    <section id="one" class="wrapper spotlight style1">
+      <div class="inner">
+        <a class="image"><img src="{{ url_for('static', filename='images/logo.jpg')}}" alt="" /></a>
+        <div class="content">
+          <h2 class="major">Консультация травматолога</h2>
+          <p>Первичный прием квалифицированного специалиста в области травматологии, осуществляемый для постановки диагноза и определения тактики лечения при переломах, ушибах, надрывах и разрывах связок, сухожилий и мышц, последствиях травм опорно-двигательного аппарата. Выполняется в условиях травмпункта или приемного покоя, включает в себя первичные диагностические мероприятия и проведение неотложных манипуляций, чаще производится в экстренном порядке. При необходимости врач назначает дополнительные обследования (обычно – рентгенографию, реже – КТ, артроскопию, МРТ) и консультации смежных специалистов.</p>
+          <a href="{{ url_for('about') }}" class="special">Подробно обо мне</a>
+        </div>
+      </div>
     </section>
+
+    <section id="four" class="wrapper alt style1">
+      <div class="inner">
+        <h2 class="major">Оказываемые услуги</h2>
+        <p> <!--Ввести текст позже--></p>
+        <section class="features">
+          {% for service in services %}
+            <article>
+              <a href="{{ url_for('services', service_name=service.alias) }}" class="image">
+                <img src="{{ url_for('static', filename=service.image) }}" alt="Изображение услуги {{ service.title }}" style="margin: auto;" />
+              </a>
+              <h3 class="major">{{ service.title }}</h3>
+              {% if service.text %}
+                <p>{{ service.text }}</p>
+              {% endif %}
+              <a href="{{ url_for('services', service_name=service.alias) }}" class="special">Подробнее</a>
+            </article>
+          {% endfor %}
+        </section>
+        <ul class="actions">
+          <li><a href="#" class="button">Посмотреть все</a></li>
+        </ul>
+      </div>
+    </section>
+  </section>
 {% endblock %}
